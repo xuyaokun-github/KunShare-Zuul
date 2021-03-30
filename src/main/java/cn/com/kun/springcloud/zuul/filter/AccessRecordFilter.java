@@ -13,7 +13,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 
 /**
- *
+ * 过滤器--记录网关返回的内容（后续对接安全监控数据上送）
  * Created by xuyaokun On 2021/1/7 23:02
  * @desc:
  */
