@@ -1,11 +1,10 @@
-package cn.com.kun.springcloud.zuul.component;
+package cn.com.kun.springcloud.zuul.component.ratelimit;
 
 import cn.com.kun.springcloud.zuul.common.utils.JacksonUtils;
 import cn.com.kun.springcloud.zuul.config.limit.ApiLimit;
 import cn.com.kun.springcloud.zuul.config.limit.IPLimit;
 import cn.com.kun.springcloud.zuul.config.limit.RateLimiterProperties;
 import cn.com.kun.springcloud.zuul.config.limit.ServiceLimitProperties;
-import cn.com.kun.springcloud.zuul.filter.pre.RateLimiterFilter;
 import com.google.common.util.concurrent.RateLimiter;
 import com.netflix.zuul.context.RequestContext;
 import org.apache.commons.lang3.StringUtils;
@@ -15,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.zuul.filters.Route;
 import org.springframework.cloud.netflix.zuul.filters.RouteLocator;
 import org.springframework.stereotype.Component;
-import org.springframework.util.AntPathMatcher;
 import org.springframework.web.util.UrlPathHelper;
 
 import javax.annotation.PostConstruct;

@@ -1,6 +1,6 @@
 package cn.com.kun.springcloud.zuul.schedule;
 
-import cn.com.kun.springcloud.zuul.component.RateLimiterHolder;
+import cn.com.kun.springcloud.zuul.component.ratelimit.RateLimiterHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

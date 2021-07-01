@@ -1,8 +1,10 @@
 package cn.com.kun.springcloud.zuul.config.limit;
 
+import cn.com.kun.springcloud.zuul.component.ratelimit.RateLimitConfigValidation;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -21,6 +23,8 @@ import java.util.Map;
 @RefreshScope
 @Component
 @ConfigurationProperties(prefix = "limit")
+@RateLimitConfigValidation
+@Validated //必须加这个注解，自定义的@RateLimitConfigValidation才会生效
 public class RateLimiterProperties implements Serializable {
 
     private boolean enabled;
