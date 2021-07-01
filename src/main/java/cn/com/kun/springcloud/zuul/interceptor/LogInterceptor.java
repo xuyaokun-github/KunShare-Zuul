@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 */
 public class LogInterceptor extends HandlerInterceptorAdapter {
 
-    public final static Logger LOGGER = LoggerFactory.getLogger(AccessRecordFilter.class);
+    public final static Logger LOGGER = LoggerFactory.getLogger(LogInterceptor.class);
 
     private ThreadLocal<Long> startTime = new ThreadLocal<>();
 

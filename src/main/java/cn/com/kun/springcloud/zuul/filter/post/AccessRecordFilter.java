@@ -35,6 +35,12 @@ public class AccessRecordFilter extends ZuulFilter {
 
     @Override
     public boolean shouldFilter() {
+        RequestContext ctx = RequestContext.getCurrentContext();
+
+        if (!ctx.sendZuulResponse()){
+            return false;
+        }
+
         //是否要被过滤，返回true,说明下面的run方法后续将会被执行
         return true;
     }
@@ -52,14 +58,17 @@ public class AccessRecordFilter extends ZuulFilter {
         logger.info("AccessRecordFilter过滤器中拿到的responseInputStream：" + responseInputStream);
         try {
             //这里拿到流转之后的body字符串，可以做业务记录，但可能很多，视业务决定
-            String bodyString = StreamUtils.copyToString(responseInputStream, StandardCharsets.UTF_8);
-            logger.info("responseInputStream处理后：{}", bodyString);
-
-            if (request.getRequestURI().contains("zuul-demo")){
-                //拼接一个内容，演示：可以通过代码修改返回给客户端的response内容
-                bodyString = bodyString + "|二次处理后内容";
+            if (responseInputStream != null){
+                //responseInputStream有可能为空，这里必须做下判断，
+                //例如请求没进到具体的服务中就返回了，这里responseInputStream就是空
+                String bodyString = StreamUtils.copyToString(responseInputStream, StandardCharsets.UTF_8);
+                logger.info("responseInputStream处理后：{}", bodyString);
+                if (request.getRequestURI().contains("zuul-demo/test3")){
+                    //拼接一个内容，演示：可以通过代码修改返回给客户端的response内容
+                    bodyString = bodyString + "|二次处理后内容";
+                }
+                ctx.setResponseBody(bodyString);
             }
-            ctx.setResponseBody(bodyString);
 
         } catch (IOException e) {
             logger.error("处理responseInputStream异常", e);
